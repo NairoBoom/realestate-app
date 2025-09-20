@@ -1,0 +1,16 @@
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/bin/Debug/net8.0/RealEstate.Application.deps.json
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/bin/Debug/net8.0/RealEstate.Application.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/bin/Debug/net8.0/RealEstate.Application.pdb
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/bin/Debug/net8.0/RealEstate.Domain.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/bin/Debug/net8.0/RealEstate.Domain.pdb
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.csproj.AssemblyReference.cache
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.GeneratedMSBuildEditorConfig.editorconfig
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.AssemblyInfoInputs.cache
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.AssemblyInfo.cs
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.csproj.CoreCompileInputs.cache
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.sourcelink.json
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEsta.ABD55878.Up2Date
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/refint/RealEstate.Application.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/RealEstate.Application.pdb
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Application/obj/Debug/net8.0/ref/RealEstate.Application.dll

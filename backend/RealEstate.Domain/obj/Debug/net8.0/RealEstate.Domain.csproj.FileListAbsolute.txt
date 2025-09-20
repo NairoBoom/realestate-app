@@ -1,0 +1,13 @@
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/bin/Debug/net8.0/RealEstate.Domain.deps.json
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/bin/Debug/net8.0/RealEstate.Domain.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/bin/Debug/net8.0/RealEstate.Domain.pdb
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.AssemblyInfoInputs.cache
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.AssemblyInfo.cs
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.csproj.CoreCompileInputs.cache
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.sourcelink.json
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/refint/RealEstate.Domain.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.pdb
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/ref/RealEstate.Domain.dll
+/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/obj/Debug/net8.0/RealEstate.Domain.csproj.AssemblyReference.cache

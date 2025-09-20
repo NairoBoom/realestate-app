@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NA0+I9LJIyg=",
+  "success": true,
+  "projectFilePath": "/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/RealEstate.Domain/RealEstate.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/nairoboom/.nuget/packages/mongodb.bson/3.5.0/mongodb.bson.3.5.0.nupkg.sha512",
+    "/home/nairoboom/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/home/nairoboom/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

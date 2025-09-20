@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.0208" branch-rate="0" version="1.9" timestamp="1758341775" lines-covered="1" lines-valid="48" branches-covered="0" branches-valid="34">
+  <sources>
+    <source>/var/www/localcafam.com.co/prueba-millon/realestate-app/backend/</source>
+  </sources>
+  <packages>
+    <package name="RealEstate.Application" line-rate="0" branch-rate="0" complexity="36">
+      <classes>
+        <class name="RealEstate.Application.Services.PropertyService" filename="RealEstate.Application/Services/PropertyService.cs" line-rate="0" branch-rate="0" complexity="14">
+          <methods>
+            <method name="Sanitize" signature="(System.String)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="14" hits="0" branch="False" />
+                <line number="15" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="16" hits="0" branch="False" />
+                <line number="17" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="NormalizeSort" signature="(System.String,System.String)" line-rate="0" branch-rate="0" complexity="10">
+              <lines>
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="22" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="20" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="101" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="25" hits="0" branch="True" condition-coverage="0% (0/4)">
+                  <conditions>
+                    <condition number="121" type="jump" coverage="0%" />
+                    <condition number="139" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="26" hits="0" branch="False" />
+                <line number="27" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetByIdAsync" signature="(System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="58" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(RealEstate.Application.Interfaces.IPropertyRepository)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="0" branch="False" />
+            <line number="15" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="16" hits="0" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="22" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="20" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="101" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="25" hits="0" branch="True" condition-coverage="0% (0/4)">
+              <conditions>
+                <condition number="121" type="jump" coverage="0%" />
+                <condition number="139" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="26" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="58" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Application.Services.PropertyService/&lt;SearchAsync&gt;d__4" filename="RealEstate.Application/Services/PropertyService.cs" line-rate="0" branch-rate="0" complexity="22">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0" branch-rate="0" complexity="22">
+              <lines>
+                <line number="30" hits="0" branch="False" />
+                <line number="32" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="31" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="33" hits="0" branch="True" condition-coverage="0% (0/6)">
+                  <conditions>
+                    <condition number="66" type="jump" coverage="0%" />
+                    <condition number="71" type="jump" coverage="0%" />
+                    <condition number="83" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="34" hits="0" branch="False" />
+                <line number="35" hits="0" branch="False" />
+                <line number="36" hits="0" branch="True" condition-coverage="0% (0/4)">
+                  <conditions>
+                    <condition number="150" type="jump" coverage="0%" />
+                    <condition number="190" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="0" branch="True" condition-coverage="0% (0/4)">
+                  <conditions>
+                    <condition number="216" type="jump" coverage="0%" />
+                    <condition number="256" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="38" hits="0" branch="True" condition-coverage="0% (0/6)">
+                  <conditions>
+                    <condition number="282" type="jump" coverage="0%" />
+                    <condition number="295" type="jump" coverage="0%" />
+                    <condition number="352" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="40" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="45" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+                <line number="48" hits="0" branch="False" />
+                <line number="49" hits="0" branch="False" />
+                <line number="50" hits="0" branch="False" />
+                <line number="51" hits="0" branch="False" />
+                <line number="53" hits="0" branch="False" />
+                <line number="54" hits="0" branch="False" />
+                <line number="55" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="0" branch="False" />
+            <line number="32" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="31" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="33" hits="0" branch="True" condition-coverage="0% (0/6)">
+              <conditions>
+                <condition number="66" type="jump" coverage="0%" />
+                <condition number="71" type="jump" coverage="0%" />
+                <condition number="83" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="34" hits="0" branch="False" />
+            <line number="35" hits="0" branch="False" />
+            <line number="36" hits="0" branch="True" condition-coverage="0% (0/4)">
+              <conditions>
+                <condition number="150" type="jump" coverage="0%" />
+                <condition number="190" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="37" hits="0" branch="True" condition-coverage="0% (0/4)">
+              <conditions>
+                <condition number="216" type="jump" coverage="0%" />
+                <condition number="256" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="38" hits="0" branch="True" condition-coverage="0% (0/6)">
+              <conditions>
+                <condition number="282" type="jump" coverage="0%" />
+                <condition number="295" type="jump" coverage="0%" />
+                <condition number="352" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="40" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="45" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="48" hits="0" branch="False" />
+            <line number="49" hits="0" branch="False" />
+            <line number="50" hits="0" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="53" hits="0" branch="False" />
+            <line number="54" hits="0" branch="False" />
+            <line number="55" hits="0" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="RealEstate.Domain" line-rate="0.0833" branch-rate="1" complexity="12">
+      <classes>
+        <class name="RealEstate.Domain.Entities.Owner" filename="RealEstate.Domain/Entities/Entities.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdOwner" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.Entities.Property" filename="RealEstate.Domain/Entities/Entities.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdProperty" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="20" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="20" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.Entities.PropertyImage" filename="RealEstate.Domain/Entities/Entities.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdPropertyImage" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.Entities.PropertyTrace" filename="RealEstate.Domain/Entities/Entities.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdPropertyTrace" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.DTOs.PropertyListDto" filename="RealEstate.Domain/DTOs/Contracts.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdProperty" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.DTOs.OwnerDto" filename="RealEstate.Domain/DTOs/Contracts.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdOwner" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.DTOs.PropertyTraceDto" filename="RealEstate.Domain/DTOs/Contracts.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_IdPropertyTrace" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="5" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.DTOs.PropertyDetailDto" filename="RealEstate.Domain/DTOs/Contracts.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name="get_IdOwner" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Images" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Int32,System.String,System.String,System.Int64,System.String,System.Int32,System.Collections.Generic.IReadOnlyList`1&lt;System.String&gt;,RealEstate.Domain.DTOs.OwnerDto,System.Collections.Generic.IReadOnlyList`1&lt;RealEstate.Domain.DTOs.PropertyTraceDto&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="RealEstate.Domain.DTOs.PropertyFilter" filename="RealEstate.Domain/DTOs/Contracts.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_Name" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Page" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

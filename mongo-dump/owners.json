@@ -1,0 +1,4 @@
+[
+  {"IdOwner":1,"Name":"Nairo Boom","Address":"Calle 1","Photo":"/img/nairo.jpg","Birthday":{"$date":"1993-01-12T00:00:00Z"}},
+  {"IdOwner":2,"Name":"Samir Vargas","Address":"Calle 2","Photo":"/img/samir.jpg","Birthday":{"$date":"1993-01-13T00:00:00Z"}}
+]

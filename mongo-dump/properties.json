@@ -1,0 +1,8 @@
+[
+  {"IdProperty":104,"Name":"Loft Industrial","Address":"Av 7 # 101-25","Price":520000000,"CodeInternal":"P-004","Year":2020,"IdOwner":2},
+  {"IdProperty":105,"Name":"Casa Campestre","Address":"Km 5 vía La Calera","Price":980000000,"CodeInternal":"P-005","Year":2016,"IdOwner":1},
+  {"IdProperty":106,"Name":"Estudio Minimal","Address":"Cll 85 # 12-34","Price":240000000,"CodeInternal":"P-006","Year":2019,"IdOwner":2},
+  {"IdProperty":107,"Name":"Penthouse Vista","Address":"Cra 9 # 122-11","Price":1500000000,"CodeInternal":"P-007","Year":2023,"IdOwner":1},
+  {"IdProperty":108,"Name":"Dúplex Urbano","Address":"Cll 63 # 18-21","Price":410000000,"CodeInternal":"P-008","Year":2017,"IdOwner":2},
+  {"IdProperty":109,"Name":"Finca","Address":"Km 8 via cota","Price":7100000000,"CodeInternal":"P-008","Year":2017,"IdOwner":1}
+]

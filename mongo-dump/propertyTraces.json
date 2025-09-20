@@ -1,0 +1,19 @@
+[
+  { "IdPropertyTrace": 1001, "DateSale": { "$date": "2021-05-20T00:00:00Z" }, "Name": "Venta inicial", "Value": 430000000, "Tax": 30000000, "IdProperty": 104 },
+  { "IdPropertyTrace": 1002, "DateSale": { "$date": "2022-02-11T00:00:00Z" }, "Name": "Reventa",       "Value": 440000000, "Tax": 31000000, "IdProperty": 104 },
+
+  { "IdPropertyTrace": 1003, "DateSale": { "$date": "2020-09-10T00:00:00Z" }, "Name": "Venta",        "Value": 330000000, "Tax": 22000000, "IdProperty": 105 },
+  { "IdPropertyTrace": 1004, "DateSale": { "$date": "2023-03-15T00:00:00Z" }, "Name": "Ajuste",       "Value": 350000000, "Tax": 23000000, "IdProperty": 105 },
+
+  { "IdPropertyTrace": 1005, "DateSale": { "$date": "2019-08-01T00:00:00Z" }, "Name": "Venta",        "Value": 250000000, "Tax": 18000000, "IdProperty": 106 },
+  { "IdPropertyTrace": 1001, "DateSale": { "$date": "2021-05-20T00:00:00Z" }, "Name": "Venta inicial", "Value": 430000000, "Tax": 30000000, "IdProperty": 106 },
+
+  { "IdPropertyTrace": 1001, "DateSale": { "$date": "2021-05-20T00:00:00Z" }, "Name": "Venta inicial", "Value": 430000000, "Tax": 30000000, "IdProperty": 107 },
+  { "IdPropertyTrace": 1002, "DateSale": { "$date": "2022-02-11T00:00:00Z" }, "Name": "Reventa",       "Value": 440000000, "Tax": 31000000, "IdProperty": 107 },
+
+  { "IdPropertyTrace": 1001, "DateSale": { "$date": "2021-05-20T00:00:00Z" }, "Name": "Venta inicial", "Value": 430000000, "Tax": 30000000, "IdProperty": 108 },
+  { "IdPropertyTrace": 1002, "DateSale": { "$date": "2022-02-11T00:00:00Z" }, "Name": "Reventa",       "Value": 440000000, "Tax": 31000000, "IdProperty": 108 },
+
+  { "IdPropertyTrace": 1001, "DateSale": { "$date": "2021-05-20T00:00:00Z" }, "Name": "Venta inicial", "Value": 430000000, "Tax": 30000000, "IdProperty": 109 },
+  { "IdPropertyTrace": 1002, "DateSale": { "$date": "2022-02-11T00:00:00Z" }, "Name": "Reventa",       "Value": 440000000, "Tax": 31000000, "IdProperty": 109 }
+]
