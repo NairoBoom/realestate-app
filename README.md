@@ -57,7 +57,7 @@ dotnet build
 dotnet run --project RealEstate.Api
 
 # 3) Frontend: deps
-cd ../frontend
+cd frontend
 npm install
 npm run dev
 
