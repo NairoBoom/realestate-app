@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { fetchProperties, fetchPropertyDetail } from "./api";
 import type { Property, PropertyDetail } from "./api";
 import "./styles.css";
 
 const resolveImage = (path?: string) =>
   !path ? "" : path.startsWith("http") ? path : `/${path.replace(/^\//, "")}`;
+
+type ViewMode = "classic" | "showcase" | "carrusel";
 
 export default function App() {
   const [items, setItems] = useState<Property[]>([]);
@@ -22,15 +24,25 @@ export default function App() {
   const [detailImg, setDetailImg] = useState<string>("");
   const [detailLoading, setDetailLoading] = useState(false);
 
-  // NUEVO: control de vista
-  const [view, setView] = useState<"classic" | "showcase">("classic");
+  // Vistas
+  const [view, setView] = useState<ViewMode>("classic");
+
+  // Showcase
   const [heroIndex, setHeroIndex] = useState(0);
+  const featured = useMemo(() => [...items].sort((a, b) => b.price - a.price).slice(0, 3), [items]);
+
+  // carrusel
+  const [fIndex, setFIndex] = useState(0);
+  const [fPaused, setFPaused] = useState(false);
+  const futurals = items; // usamos toda la lista
 
   const load = async () => {
     setLoading(true); setErr("");
     try {
       const data = await fetchProperties({ name, address, minPrice, maxPrice, sortBy, sortDir });
       setItems(data.items ?? []);
+      setHeroIndex(0);
+      setFIndex(0);
     } catch (e: any) {
       setErr(e.message || "Error");
     } finally {
@@ -39,20 +51,17 @@ export default function App() {
   };
 
   const reset = async () => {
-    setName(""); 
-    setAddress(""); 
-    setMinPrice(""); 
-    setMaxPrice("");
-    setSortBy("price"); 
-    setSortDir("desc");
+    setName(""); setAddress(""); setMinPrice(""); setMaxPrice("");
+    setSortBy("price"); setSortDir("desc");
 
-    setLoading(true);
-    setErr("");
+    setLoading(true); setErr("");
     try {
-      const data = await fetchProperties({ 
+      const data = await fetchProperties({
         name: "", address: "", minPrice: "", maxPrice: "", sortBy: "price", sortDir: "desc"
       });
       setItems(data.items ?? []);
+      setHeroIndex(0);
+      setFIndex(0);
     } catch (e: any) {
       setErr(e.message || "Error");
     } finally {
@@ -60,7 +69,7 @@ export default function App() {
     }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); /* on mount */ }, []);
   const onSubmit = (e: React.FormEvent) => { e.preventDefault(); load(); };
 
   const openDetail = async (p: Property) => {
@@ -78,13 +87,6 @@ export default function App() {
     []
   );
 
-  // === Showcase helpers ===
-  const featured = useMemo(() => {
-    // top por precio
-    return [...items].sort((a, b) => b.price - a.price).slice(0, 3);
-  }, [items]);
-
-  // autoplay del hero cuando esté en "showcase"
   useEffect(() => {
     if (view !== "showcase" || featured.length <= 1) return;
     const t = setInterval(() => setHeroIndex(i => (i + 1) % featured.length), 5000);
@@ -94,12 +96,7 @@ export default function App() {
   const HeroSlide = ({ p, active }: { p: Property; active: boolean }) => {
     const src = resolveImage(p.image);
     return (
-      <div
-        className={`hero__slide ${active ? "is-active" : ""}`}
-        role="group"
-        aria-roledescription="slide"
-        aria-label={p.name || "Propiedad"}
-      >
+      <div className={`hero__slide ${active ? "is-active" : ""}`} role="group" aria-roledescription="slide" aria-label={p.name || "Propiedad"}>
         <div className="hero__media">{src && <img src={src} alt={p.name} />}</div>
         <div className="hero__overlay" />
         <div className="hero__content">
@@ -113,6 +110,50 @@ export default function App() {
     );
   };
 
+  const goF = (dir: number) => {
+    if (!futurals.length) return;
+    setFIndex(i => (i + dir + futurals.length) % futurals.length);
+  };
+
+  useEffect(() => {
+    if (view !== "carrusel" || futurals.length <= 1) return;
+    const id = setInterval(() => { if (!fPaused) goF(1); }, 4000);
+    return () => clearInterval(id);
+  }, [view, futurals.length, fPaused]);
+
+  useEffect(() => {
+    if (view !== "carrusel") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") goF(1);
+      if (e.key === "ArrowLeft") goF(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [view, futurals.length]);
+
+  const slideStyle = (i: number) => {
+    const n = futurals.length || 1;
+    const half = Math.floor(n / 2);
+    let delta = i - fIndex;
+    if (delta > half) delta -= n;
+    if (delta < -half) delta += n;
+
+    const abs = Math.abs(delta);
+    const baseX = window.innerWidth < 680 ? 160 : 240; 
+    const translateX = delta * baseX;
+    const rotateY = delta * -18;                
+    const translateZ = -abs * 90 + (abs === 0 ? 120 : 0); 
+    const scale = 1 - Math.min(abs * 0.08, 0.4);
+    const zIndex = 100 - abs;
+    const opacity = 1 - Math.min(abs * 0.14, 0.65);
+
+    return {
+      transform: `translate(-50%,-50%) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+      zIndex,
+      opacity,
+    } as React.CSSProperties;
+  };
+
   return (
     <>
       <div className="bg-anim" />
@@ -121,7 +162,6 @@ export default function App() {
           <main className="container">
             <h1 className="title">Inmobiliaria</h1>
 
-            {/* Filtros */}
             <form className="filters" onSubmit={onSubmit}>
               <input placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
               <input placeholder="Dirección" value={address} onChange={(e) => setAddress(e.target.value)} />
@@ -152,29 +192,27 @@ export default function App() {
             {/* Switch de vista */}
             <div className="view-switch" role="tablist" aria-label="Cambiar vista">
               <button
-                role="tab"
-                aria-selected={view === "classic"}
+                role="tab" aria-selected={view === "classic"}
                 className={`view-pill ${view === "classic" ? "is-active" : ""}`}
                 onClick={() => setView("classic")}
-              >
-                Vista clásica
-              </button>
+              >Clásica</button>
               <button
-                role="tab"
-                aria-selected={view === "showcase"}
+                role="tab" aria-selected={view === "showcase"}
                 className={`view-pill ${view === "showcase" ? "is-active" : ""}`}
                 onClick={() => setView("showcase")}
-              >
-                Showcase
-              </button>
+              >Showcase</button>
+              <button
+                role="tab" aria-selected={view === "carrusel"}
+                className={`view-pill ${view === "carrusel" ? "is-active" : ""}`}
+                onClick={() => setView("carrusel")}
+              >carrusel</button>
             </div>
 
             {err && <div className="error">⚠️ {err}</div>}
 
-            {/* === Vista SHOWCASE === */}
-            {view === "showcase" ? (
+            {/* ===== VISTA SHOWCASE ===== */}
+            {view === "showcase" && (
               <>
-                {/* Hero slider */}
                 <section className="hero" aria-roledescription="carousel" aria-label="Destacados">
                   <div className="hero__track">
                     {featured.map((p, i) => (
@@ -196,7 +234,7 @@ export default function App() {
                   )}
                 </section>
 
-                {/* Grilla premium */}
+                {/* grilla showcase */}
                 {loading ? (
                   <ul className="showcase-grid">
                     {Array.from({ length: 6 }).map((_, i) => (
@@ -216,7 +254,7 @@ export default function App() {
                     {items.map((p) => {
                       const src = resolveImage(p.image);
                       return (
-                        <li key={p.idProperty} className="show-card" onClick={() => openDetail(p)}>
+                        <li key={p.idProperty} className="show-card" onClick={() => openDetail(p)} style={{ cursor: "pointer" }}>
                           <div className="glow-border" />
                           <div className="show-media">{src && <img src={src} alt={p.name} loading="lazy" />}</div>
                           <div className="show-over">
@@ -233,8 +271,10 @@ export default function App() {
                   </ul>
                 )}
               </>
-            ) : (
-              /* === Vista CLÁSICA existente === */
+            )}
+
+            {/* ===== VISTA CLÁSICA ===== */}
+            {view === "classic" && (
               <>
                 {loading ? (
                   <ul className="grid">
@@ -270,6 +310,69 @@ export default function App() {
                       );
                     })}
                   </ul>
+                )}
+              </>
+            )}
+
+            {/* ===== VISTA carrusel (Carrusel 3D) ===== */}
+            {view === "carrusel" && (
+              <>
+                {loading ? (
+                  <div className="empty">Cargando…</div>
+                ) : futurals.length === 0 ? (
+                  <div className="empty">No se encontraron propiedades.</div>
+                ) : (
+                  <section
+                    className="futura"
+                    aria-roledescription="carousel"
+                    aria-label="Carrusel carrusel de propiedades"
+                    onMouseEnter={() => setFPaused(true)}
+                    onMouseLeave={() => setFPaused(false)}
+                  >
+                    <div className="futura-track">
+                      {futurals.map((p, i) => {
+                        const src = resolveImage(p.image);
+                        const isCenter = i === fIndex;
+                        return (
+                          <article
+                            key={p.idProperty}
+                            className={`futura-card ${isCenter ? "is-center" : ""}`}
+                            style={slideStyle(i)}
+                            onClick={() => openDetail(p)}
+                            aria-roledescription="slide"
+                            aria-label={p.name || `Propiedad ${i + 1}`}
+                          >
+                            {src && <img src={src} alt={p.name} loading="lazy" />}
+                            <div className="futura-glass">
+                              <div className="futura-title">{p.name || "Sin título"}</div>
+                              <div className="futura-meta">
+                                <span className="futura-price">{formatCOP.format(p.price)}</span>
+                                <span className="futura-dot" />
+                                <span className="futura-addr">{p.address}</span>
+                              </div>
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+
+                    <div className="futura-nav" aria-hidden="false">
+                      <button aria-label="Anterior" onClick={() => goF(-1)}>‹</button>
+                      <button aria-label="Siguiente" onClick={() => goF(1)}>›</button>
+                    </div>
+
+                    <div className="futura-dots">
+                      {futurals.map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Ir al slide ${i + 1}`}
+                          aria-current={fIndex === i}
+                          onClick={() => setFIndex(i)}
+                          type="button"
+                        />
+                      ))}
+                    </div>
+                  </section>
                 )}
               </>
             )}

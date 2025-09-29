@@ -330,3 +330,98 @@ body{
 .show-card .skel-line{
   height:12px; background:#283056; border-radius:6px; margin:10px 0;
 }
+
+/* ===== Carrusel (3D Coverflow) ===== */
+.futura{
+  position: relative;
+  margin: 8px 0 18px;
+  height: clamp(320px, 52vw, 520px);
+  perspective: 1200px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(90% 90% at 70% 20%, rgba(124,58,237,.14), transparent 60%),
+    radial-gradient(70% 80% at 20% 80%, rgba(34,211,238,.14), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  box-shadow: 0 16px 44px rgba(0,0,0,.40);
+  overflow: hidden;
+}
+.futura-track{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex; align-items: center; justify-content: center;
+}
+.futura-card{
+  position: absolute; top: 50%; left: 50%;
+  width: min(76vw, 520px);
+  height: min(46vw, 340px);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0f1222;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  transition: transform .55s cubic-bezier(.2,.8,.25,1), opacity .45s ease, filter .25s ease, box-shadow .25s ease, border-color .25s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+@media (min-width: 760px){
+  .futura-card{ width: 520px; height: 340px; }
+}
+.futura-card.is-center{
+  box-shadow: 0 26px 64px rgba(124,58,237,.25), 0 18px 48px rgba(0,0,0,.45);
+  border-color: #3a3f66;
+}
+.futura-card img{ width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.02); }
+.futura:hover .futura-card:not(.is-center){ filter: blur(1px) brightness(.85); }
+
+.futura-glass{
+  position: absolute; left: 12px; right: 12px; bottom: 12px;
+  display: grid; gap: 6px; align-items: center; justify-items: center; text-align: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(4,7,18,.45);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(6px);
+}
+.futura-title{
+  font-weight: 900; letter-spacing: .2px; color: #eef2ff;
+  font-size: clamp(14px, 2.1vw, 18px);
+}
+.futura-meta{
+  display: flex; gap: 10px; align-items: center; justify-content: center; color: #cbd5e1; font-size: 12px;
+}
+.futura-price{
+  font-weight: 900;
+  background: linear-gradient(90deg,#a5f3fc,#d8b4fe);
+  -webkit-background-clip:text; background-clip:text; color: transparent;
+}
+.futura-dot{
+  width: 6px; height: 6px; border-radius: 999px; background: rgba(255,255,255,.5);
+}
+
+.futura-nav{
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 8px; pointer-events: none;
+}
+.futura-nav button{
+  pointer-events: auto;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(10,12,20,.65);
+  color: #fff; cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform .12s ease, background .15s ease, border-color .15s ease;
+}
+.futura-nav button:hover{ transform: translateY(-1px); border-color: #3a3f66; background: rgba(18,22,36,.85) }
+
+.futura-dots{
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  display: flex; gap: 8px; justify-content: center;
+}
+.futura-dots button{
+  width: 8px; height: 8px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.45); cursor: pointer; padding: 0;
+}
+.futura-dots button[aria-current="true"]{ background: #fff; }
