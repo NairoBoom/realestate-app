@@ -22,6 +22,10 @@ export default function App() {
   const [detailImg, setDetailImg] = useState<string>("");
   const [detailLoading, setDetailLoading] = useState(false);
 
+  // NUEVO: control de vista
+  const [view, setView] = useState<"classic" | "showcase">("classic");
+  const [heroIndex, setHeroIndex] = useState(0);
+
   const load = async () => {
     setLoading(true); setErr("");
     try {
@@ -35,7 +39,6 @@ export default function App() {
   };
 
   const reset = async () => {
-    // 1. Limpio estados
     setName(""); 
     setAddress(""); 
     setMinPrice(""); 
@@ -43,17 +46,11 @@ export default function App() {
     setSortBy("price"); 
     setSortDir("desc");
 
-    // 2. Llamo a load con filtros vacíos explícitos
     setLoading(true);
     setErr("");
     try {
       const data = await fetchProperties({ 
-        name: "", 
-        address: "", 
-        minPrice: "", 
-        maxPrice: "", 
-        sortBy: "price", 
-        sortDir: "desc" 
+        name: "", address: "", minPrice: "", maxPrice: "", sortBy: "price", sortDir: "desc"
       });
       setItems(data.items ?? []);
     } catch (e: any) {
@@ -62,7 +59,6 @@ export default function App() {
       setLoading(false);
     }
   };
-
 
   useEffect(() => { load(); }, []);
   const onSubmit = (e: React.FormEvent) => { e.preventDefault(); load(); };
@@ -82,15 +78,50 @@ export default function App() {
     []
   );
 
+  // === Showcase helpers ===
+  const featured = useMemo(() => {
+    // top por precio
+    return [...items].sort((a, b) => b.price - a.price).slice(0, 3);
+  }, [items]);
+
+  // autoplay del hero cuando esté en "showcase"
+  useEffect(() => {
+    if (view !== "showcase" || featured.length <= 1) return;
+    const t = setInterval(() => setHeroIndex(i => (i + 1) % featured.length), 5000);
+    return () => clearInterval(t);
+  }, [view, featured.length]);
+
+  const HeroSlide = ({ p, active }: { p: Property; active: boolean }) => {
+    const src = resolveImage(p.image);
+    return (
+      <div
+        className={`hero__slide ${active ? "is-active" : ""}`}
+        role="group"
+        aria-roledescription="slide"
+        aria-label={p.name || "Propiedad"}
+      >
+        <div className="hero__media">{src && <img src={src} alt={p.name} />}</div>
+        <div className="hero__overlay" />
+        <div className="hero__content">
+          <div className="chip">Destacado</div>
+          <h3>{p.name || "Sin título"}</h3>
+          <p className="hero__addr">{p.address}</p>
+          <div className="hero__price">{formatCOP.format(p.price)}</div>
+          <button className="btn btn-hero" onClick={() => openDetail(p)}>Ver detalle</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="bg-anim" />
       <div className="app-root">
-        {/**/}
         <div className="page">
           <main className="container">
             <h1 className="title">Inmobiliaria</h1>
 
+            {/* Filtros */}
             <form className="filters" onSubmit={onSubmit}>
               <input placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
               <input placeholder="Dirección" value={address} onChange={(e) => setAddress(e.target.value)} />
@@ -118,42 +149,129 @@ export default function App() {
               </div>
             </form>
 
+            {/* Switch de vista */}
+            <div className="view-switch" role="tablist" aria-label="Cambiar vista">
+              <button
+                role="tab"
+                aria-selected={view === "classic"}
+                className={`view-pill ${view === "classic" ? "is-active" : ""}`}
+                onClick={() => setView("classic")}
+              >
+                Vista clásica
+              </button>
+              <button
+                role="tab"
+                aria-selected={view === "showcase"}
+                className={`view-pill ${view === "showcase" ? "is-active" : ""}`}
+                onClick={() => setView("showcase")}
+              >
+                Showcase
+              </button>
+            </div>
+
             {err && <div className="error">⚠️ {err}</div>}
 
-            {loading ? (
-              <ul className="grid">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <li key={i} className="skeleton">
-                    <div className="skel-thumb" />
-                    <div className="skel-body">
-                      <div className="skel-line" style={{ width: "70%" }} />
-                      <div className="skel-line" style={{ width: "50%" }} />
-                      <div className="skel-line" style={{ width: "30%" }} />
+            {/* === Vista SHOWCASE === */}
+            {view === "showcase" ? (
+              <>
+                {/* Hero slider */}
+                <section className="hero" aria-roledescription="carousel" aria-label="Destacados">
+                  <div className="hero__track">
+                    {featured.map((p, i) => (
+                      <HeroSlide key={p.idProperty} p={p} active={heroIndex === i} />
+                    ))}
+                  </div>
+                  {featured.length > 1 && (
+                    <div className="hero__dots">
+                      {featured.map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Ir al slide ${i + 1}`}
+                          aria-current={heroIndex === i}
+                          onClick={() => setHeroIndex(i)}
+                          type="button"
+                        />
+                      ))}
                     </div>
-                  </li>
-                ))}
-              </ul>
-            ) : items.length === 0 ? (
-              <div className="empty">No se encontraron propiedades.</div>
+                  )}
+                </section>
+
+                {/* Grilla premium */}
+                {loading ? (
+                  <ul className="showcase-grid">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <li key={i} className="show-card skel">
+                        <div className="show-media skel" />
+                        <div className="show-body">
+                          <div className="skel-line" />
+                          <div className="skel-line" style={{ width: "60%" }} />
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : items.length === 0 ? (
+                  <div className="empty">No se encontraron propiedades.</div>
+                ) : (
+                  <ul className="showcase-grid">
+                    {items.map((p) => {
+                      const src = resolveImage(p.image);
+                      return (
+                        <li key={p.idProperty} className="show-card" onClick={() => openDetail(p)}>
+                          <div className="glow-border" />
+                          <div className="show-media">{src && <img src={src} alt={p.name} loading="lazy" />}</div>
+                          <div className="show-over">
+                            <span className="pill">{formatCOP.format(p.price)}</span>
+                            <span className="over-addr">{p.address}</span>
+                          </div>
+                          <div className="show-body">
+                            <h4>{p.name || "Sin título"}</h4>
+                            <button className="btn btn-ghost" type="button">Ver detalle</button>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </>
             ) : (
-              <ul className="grid">
-                {items.map((p) => {
-                  const src = resolveImage(p.image);
-                  return (
-                    <li key={p.idProperty} className="card" onClick={() => openDetail(p)} style={{ cursor: "pointer" }}>
-                      <div className="thumb">
-                        {src && <img src={src} alt={p.name} loading="lazy" width={1200} height={900} />}
-                      </div>
-                      <div className="card-body">
-                        <div className="card-title">{p.name || "Sin título"}</div>
-                        <div className="addr">{p.address}</div>
-                        <div className="price">{formatCOP.format(p.price)}</div>
-                        <small className="addr">Propietario #{p.idOwner}</small>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+              /* === Vista CLÁSICA existente === */
+              <>
+                {loading ? (
+                  <ul className="grid">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <li key={i} className="skeleton">
+                        <div className="skel-thumb" />
+                        <div className="skel-body">
+                          <div className="skel-line" style={{ width: "70%" }} />
+                          <div className="skel-line" style={{ width: "50%" }} />
+                          <div className="skel-line" style={{ width: "30%" }} />
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : items.length === 0 ? (
+                  <div className="empty">No se encontraron propiedades.</div>
+                ) : (
+                  <ul className="grid">
+                    {items.map((p) => {
+                      const src = resolveImage(p.image);
+                      return (
+                        <li key={p.idProperty} className="card" onClick={() => openDetail(p)} style={{ cursor: "pointer" }}>
+                          <div className="thumb">
+                            {src && <img src={src} alt={p.name} loading="lazy" width={1200} height={900} />}
+                          </div>
+                          <div className="card-body">
+                            <div className="card-title">{p.name || "Sin título"}</div>
+                            <div className="addr">{p.address}</div>
+                            <div className="price">{formatCOP.format(p.price)}</div>
+                            <small className="addr">Propietario #{p.idOwner}</small>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </>
             )}
           </main>
         </div>
@@ -196,7 +314,9 @@ export default function App() {
               </div>
               <div className="traces">
                 <h4>Historial</h4>
-                {detail?.traces?.length ? detail.traces.map(t => (
+                {detailLoading ? (
+                  <div className="kv">Cargando…</div>
+                ) : detail?.traces?.length ? detail.traces.map(t => (
                   <div className="trace-row" key={t.idPropertyTrace}>
                     <div>{t.name} — {new Date(t.dateSale).toLocaleDateString()}</div>
                     <div>{formatCOP.format(t.value)}</div>
